@@ -1,0 +1,23 @@
+{
+  "name": "toy-finance-microfrontends",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n host,balance -c blue,green \"npm:dev:host\" \"npm:dev:balance\"",
+    "dev:host": "npm --workspace @toy-finance/host run dev",
+    "dev:balance": "npm --workspace @toy-finance/balance run dev",
+    "build": "npm run build:balance && npm run build:host",
+    "build:host": "npm --workspace @toy-finance/host run build",
+    "build:balance": "npm --workspace @toy-finance/balance run build"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "concurrently": "^9.2.1",
+    "postcss": "^8.5.31",
+    "postcss-loader": "^8.2.1",
+    "tailwindcss": "^4.3.3"
+  }
+}
